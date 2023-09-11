@@ -3,14 +3,15 @@ layout: post
 title: SteamCloud - HTB
 date: 2023-09-11 14:36 -0300
 categories: [HackTheBox, Easy]
-tags: [cloud]
+tags: [cloud, yaml, kubernetes, kubelets, htb-cloud-track]
 image: https://0xtonyr.github.io/assets/img/hackthebox/steamcloud/SteamCloud-0.png
 ---
 
-# SteamCloud
+## About SteamCloud
+
+A port scan conducted with nmap reveals specific Kubernetes and Kubelet ports running on the target. It is not possible to enumerate the Kubernetes API because it requires authentication. However, it is possible to enumerate the Kubelet service on port 10250 and discover the pods running in the Kubernetes cluster. The nginx pod allows code execution, and within it, the access token and certificate can be found for authenticating to the Kubernetes API. With the token and certificate, a new malicious pod was created, and the main target's filesystem was mounted within it, allowing for the capture of both user and root flags.
 
 ![SteamCloud0](https://0xtonyr.github.io/assets/img/hackthebox/steamcloud/SteamCloud-0.png)
-
 
 # Initial scan and enumeration
 
