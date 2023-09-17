@@ -8,8 +8,6 @@ order: 4
 
 ## Pentester / Red Team / Cybersecurity Analyst
 
-![Untitled](https://0xtonyr.github.io/assets/img/profile2.jpeg)
-
 e-mail: [antoniovitor.rodrigues@outlook.com](mailto:antoniovitor.rodrigues@outlook.com)
 
 LinkedIn: [https://www.linkedin.com/in/antonio-vitor-rodrigues-ba1695181/](https://www.linkedin.com/in/antonio-vitor-rodrigues-ba1695181/)
