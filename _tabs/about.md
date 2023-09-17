@@ -4,5 +4,19 @@ icon: fas fa-info-circle
 order: 4
 ---
 
-> Add Markdown syntax content to file `_tabs/about.md`{: .filepath } and it will show up on this page.
-{: .prompt-tip }
+# About 0xtonyr
+
+## Pentester / Red Team / Cybersecurity Analyst
+
+![Untitled](assets/img/profile2.jpeg)
+
+City: Sobradinho - DF
+
+e-mail: [antoniovitor.rodrigues@outlook.com](mailto:antoniovitor.rodrigues@outlook.com)
+
+LinkedIn: [https://www.linkedin.com/in/antonio-vitor-rodrigues-ba1695181/](https://www.linkedin.com/in/antonio-vitor-rodrigues-ba1695181/)
+
+# Languages
+
+- Native: Portuguese
+- Proficient: English
