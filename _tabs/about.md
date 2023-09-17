@@ -8,7 +8,7 @@ order: 4
 
 ## Pentester / Red Team / Cybersecurity Analyst
 
-![Untitled](assets/img/profile2.jpeg)
+![Untitled](https://0xtonyr.github.io/assets/img/profile2.jpeg)
 
 e-mail: [antoniovitor.rodrigues@outlook.com](mailto:antoniovitor.rodrigues@outlook.com)
 
