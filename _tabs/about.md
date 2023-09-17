@@ -4,8 +4,6 @@ icon: fas fa-info-circle
 order: 4
 ---
 
-# About 0xtonyr
-
 ## Contact info
 
 e-mail: [antoniovitor.rodrigues@outlook.com](mailto:antoniovitor.rodrigues@outlook.com)
