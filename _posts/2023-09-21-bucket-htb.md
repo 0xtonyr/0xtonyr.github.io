@@ -11,8 +11,6 @@ image: https://0xtonyr.github.io/assets/img/hackthebox/bucket/Bucket-0.png
 
 "A port scan conducted with nmap reveals port 80 running an Apache server, with stored files pointing to an open S3 bucket. It's possible to upload a PHP shell to the bucket to establish a reverse connection. After some local enumeration, we identify a user on the system, along with their password exposed in a DynamoDB database configuration file. Last but not least, an internal application running as root and poorly configured allows elevation of privileges.
 
----
-
 ![Bucket-0](https://0xtonyr.github.io/assets/img/hackthebox/bucket/Bucket-0.png)
 
 # Initial scans and enumeration
