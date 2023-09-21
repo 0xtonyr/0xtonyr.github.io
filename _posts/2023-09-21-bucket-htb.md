@@ -181,7 +181,7 @@ https://s3-[region].domainname.com/[bucketname]`
     
 4. Navigating to http://bucket.htb/test.php, you can see the phpinfo page displaying information about the PHP version running on the target.
     
-    ![Bucket-5](https://0xtonyr.github.io/assets/img/hackthebox/bucket/Bucket-05.png)
+    ![Bucket-5](https://0xtonyr.github.io/assets/img/hackthebox/bucket/Bucket-5.png)
     
 
 **Note:** This part had to be repeated several times due to some kind of script cleaning the files in the Bucket's root approximately every 1 minute.
@@ -209,7 +209,7 @@ upload: ./cmd.php to s3://adserver/cmd.php
 
 `curl http://bucket.htb/cmd.php?cmd=whoami`
 
-![Bucket](https://0xtonyr.github.io/assets/img/hackthebox/bucket/Bucket-06.png)
+![Bucket](https://0xtonyr.github.io/assets/img/hackthebox/bucket/Bucket-6.png)
 
 RCE confirmed!
 
@@ -375,7 +375,7 @@ n2vM-<_K_Q:.Aa2
 
 `hydra -l 'roy' -P ./pass.txt ssh://10.10.10.212/`
 
-![Bucket-09](https://0xtonyr.github.io/assets/img/hackthebox/bucket/Bucket-09.png)
+![Bucket-09](https://0xtonyr.github.io/assets/img/hackthebox/bucket/Bucket-9.png)
 
 Now I can log into the system using the credentials `roy:n2vM-<_K_Q:.Aa2`.
 
@@ -398,7 +398,7 @@ roy@bucket:~$
 
 ### user.txt flag
 
-![Bucket-10](https://0xtonyr.github.io/assets/img/hackthebox/bucket/Bucket-010.png)
+![Bucket-10](https://0xtonyr.github.io/assets/img/hackthebox/bucket/Bucket-10.png)
 
 ---
 
@@ -445,7 +445,7 @@ I set up local port forwarding using SSH so that I can access the target's port 
 
 Now I can go to my machine at http://localhost:8000 and view the running bucket-app.
 
-![Bucket](https://0xtonyr.github.io/assets/img/hackthebox/bucket/Bucket-011.png)
+![Bucket](https://0xtonyr.github.io/assets/img/hackthebox/bucket/Bucket-11.png)
 
 I decided to use `scp` to exfiltrate the `index.js` file from `bucket-app` to my PC so that I can analyze the application's code more thoroughly:
 
@@ -611,7 +611,7 @@ result.pdf                                       100%[==========================
 2023-09-16 20:24:01 (14.7 MB/s) - ‘result.pdf’ saved [1647/1647]
 ```
 
-![Bucket-12](https://0xtonyr.github.io/assets/img/hackthebox/bucket/Bucket-012.png)
+![Bucket-12](https://0xtonyr.github.io/assets/img/hackthebox/bucket/Bucket-12.png)
 
 The PDF was created according to the provided HTML tags.
 
@@ -648,7 +648,7 @@ result.pdf                                       100%[==========================
 
 Opening the file, there is only a blank page with a paperclip icon. Clicking the paperclip twice will generate the file with the payload I inserted earlier, in this case, displaying the `/etc/passwd` of the target.
 
-![Bucket-13](https://0xtonyr.github.io/assets/img/hackthebox/bucket/Bucket-013.png)
+![Bucket-13](https://0xtonyr.github.io/assets/img/hackthebox/bucket/Bucket-13.png)
 
 This entire process had to be repeated numerous times due to some kind of table cleanup in the database every 1 minute or so. So, I decided to create a small script to be run in the SSH session with the user `roy`, automating the process of creating the `result.pdf` file.
 
@@ -710,7 +710,7 @@ roy@bucket:~$ ls /var/www/bucket-app/files/
 -----END OPENSSH PRIVATE KEY-----
 ```
 
-![Bucket-14](https://0xtonyr.github.io/assets/img/hackthebox/bucket/Bucket-014.png)
+![Bucket-14](https://0xtonyr.github.io/assets/img/hackthebox/bucket/Bucket-14.png)
 
 ### login as root
 
@@ -720,10 +720,10 @@ After copying and pasting the private key into a file named `id_rsa`, I edited t
 
 `ssh -i id_rsa root@10.10.10.212`
 
-![Bucket-15](https://0xtonyr.github.io/assets/img/hackthebox/bucket/Bucket-015.png)
+![Bucket-15](https://0xtonyr.github.io/assets/img/hackthebox/bucket/Bucket-15.png)
 
 ### root.txt flag
 
-![Bucket-16](https://0xtonyr.github.io/assets/img/hackthebox/bucket/Bucket-016.png)
+![Bucket-16](https://0xtonyr.github.io/assets/img/hackthebox/bucket/Bucket-16.png)
 
-![Bucket-17](https://0xtonyr.github.io/assets/img/hackthebox/bucket/Bucket-017.png)
+![Bucket-17](https://0xtonyr.github.io/assets/img/hackthebox/bucket/Bucket-17.png)
