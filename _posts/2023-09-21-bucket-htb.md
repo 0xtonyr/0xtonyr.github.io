@@ -106,11 +106,6 @@ access-control-expose-headers: x-amz-version-id
 
 > [LocalStack](https://localstack.cloud/) is a cloud service emulator that runs in a single container on your laptop or in your CI environment. With LocalStack, you can run your AWS applications or Lambdas entirely on your local machine without connecting to a remote cloud provider! Whether you are testing complex CDK applications or Terraform configurations, or just beginning to learn about AWS services, LocalStack helps speed up and simplify your testing and development workflow."
  
-
-"When I attempted again, this time navigating to `http://s3.bucket.htb/shell/`, I found a webshell to interact with the DynamoDB database, which is present in AWS clouds. Unfortunately, the machine encountered some bugs, and at the moment when I was doing...
-
----
-
 The address `s3.bucket.htb` corresponds to a local instance of *Amazon Simple Storage Service (Amazon S3)*. It's important to note that S3 stores data as objects within buckets. Buckets are containers for objects.
 
 > You can have one or more buckets. For each bucket, you can control access to it (who can create, delete, and list objects in it), view access logs for it and its objects, choose the geographical region where Amazon S3 will store the bucket and its contents.
@@ -398,7 +393,6 @@ roy@bucket:~$
 
 ![Bucket-10](https://0xtonyr.github.io/assets/img/hackthebox/bucket/Bucket-10.png)
 
----
 
 # Privilege escalation
 
