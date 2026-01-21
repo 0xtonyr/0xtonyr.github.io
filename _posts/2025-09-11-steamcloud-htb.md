@@ -1,7 +1,7 @@
 ---
 layout: post
 title: SteamCloud - HTB
-date: 2023-09-11 14:36 -0300
+date: 2025-09-11 14:36 -0300
 categories: [HackTheBox, Easy]
 tags: [cloud, yaml, kubernetes, kubelets, htb-cloud-track]
 image: https://0xtonyr.github.io/assets/img/hackthebox/steamcloud/SteamCloud-0.png
