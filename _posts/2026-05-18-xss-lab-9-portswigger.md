@@ -2,7 +2,7 @@
 layout: post
 title: "XSS Lab #9 - Reflected XSS into a JavaScript String with Angle Brackets HTML Encoded"
 date: 2026-05-18 00:00 -0300
-categories: [Web Security, XSS]
+categories: [Web Security Academy, XSS]
 tags: [xss, reflected-xss, javascript, portswigger, web-security-academy, caido]
 image: https://0xtonyr.github.io/assets/img/portswigger/xss-lab-9/alert-triggered.png
 excerpt: "Breaking out of a JavaScript string context to trigger an alert when angle brackets are HTML encoded."
