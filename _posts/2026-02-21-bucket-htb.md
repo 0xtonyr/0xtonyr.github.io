@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Bucket - HTB
-date: 2023-09-21 14:48 -0300
+date: 2026-02-21 14:48 -0300
 categories: [HackTheBox, Medium]
 tags: [cloud, AWS, PHP, Source Code Analysis, Arbitrary File Read, Arbitrary File Upload, Misconfiguration, Weak Permissions, htb-cloud-track]
 image: /assets/img/hackthebox/bucket/Bucket-0.png
@@ -208,7 +208,7 @@ RCE confirmed!
 
 Since my webshell was constantly being deleted by the server due to the cleanup script, I decided to upload a file that would establish a reverse connection to my machine as soon as it was executed. For this purpose, I used the [php-reverse-shell](https://raw.githubusercontent.com/ivan-sincek/php-reverse-shell/master/src/reverse/php_reverse_shell.php) taken from Ivan Sincek's GitHub, only needing to change the IP to my address and select the desired port to receive the connection.
 
-![Bucket](/assets/img/hackthebox/bucket/Bucket-07.png)
+![Bucket](/assets/img/hackthebox/bucket/Bucket-7.png)
 
 ### Obtained Reverse Shell
 
@@ -226,7 +226,7 @@ upload: ./is-shell.php to s3://adserver/is-shell.php
 ```
 
 With `nc` listening on port 2000, I navigated to http://bucket.htb/is-shell and received the reverse connection:
-![Bucket](/assets/img/hackthebox/bucket/Bucket-08.png)
+![Bucket](/assets/img/hackthebox/bucket/Bucket-8.png)
 
 On the link below, there are several options to enhance the received terminal:
 [https://book.hacktricks.xyz/generic-methodologies-and-resources/shells/full-ttys](https://book.hacktricks.xyz/generic-methodologies-and-resources/shells/full-ttys)
