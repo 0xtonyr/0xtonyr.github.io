@@ -4,14 +4,14 @@ title: SteamCloud - HTB
 date: 2023-09-11 14:36 -0300
 categories: [HackTheBox, Easy]
 tags: [cloud, yaml, kubernetes, kubelets, htb-cloud-track]
-image: https://0xtonyr.github.io/assets/img/hackthebox/steamcloud/SteamCloud-0.png
+image: /assets/img/hackthebox/steamcloud/SteamCloud-0.png
 ---
 
 ## About SteamCloud
 
 A port scan conducted with nmap reveals specific Kubernetes and Kubelet ports running on the target. It is not possible to enumerate the Kubernetes API because it requires authentication. However, it is possible to enumerate the Kubelet service on port 10250 and discover the pods running in the Kubernetes cluster. The nginx pod allows code execution, and within it, the access token and certificate can be found for authenticating to the Kubernetes API. With the token and certificate, a new malicious pod was created, and the main target's filesystem was mounted within it, allowing for the capture of both user and root flags.
 
-![SteamCloud0](https://0xtonyr.github.io/assets/img/hackthebox/steamcloud/SteamCloud-0.png)
+![SteamCloud0](/assets/img/hackthebox/steamcloud/SteamCloud-0.png)
 
 # Initial scan and enumeration
 
@@ -202,7 +202,7 @@ To confirm that the nginx pod is vulnerable to RCE (Remote Code Execution), I de
 
 `kubeletctl run "ls /" --namespace default --pod nginx --container nginx --server 10.10.11.133`
 
-![SteamCloud-1](https://0xtonyr.github.io/assets/img/hackthebox/steamcloud/SteamCloud-1.png)
+![SteamCloud-1](/assets/img/hackthebox/steamcloud/SteamCloud-1.png)
 
 With RCE confirmed, I can start enumerating the filesystem in search of the access token and the pod's certificate.
 
@@ -254,7 +254,7 @@ Export the token as an environment variable:
 
 The command checks the permissions of a user in Kubernetes based on the provided authentication token, the Certificate Authority (CA) certificate, and the specified API server address.
 
-![SteamCloud-2](https://0xtonyr.github.io/assets/img/hackthebox/steamcloud/SteamCloud-2.png)
+![SteamCloud-2](/assets/img/hackthebox/steamcloud/SteamCloud-2.png)
 
 We have permission to get, create, and list for pods.
 
@@ -316,6 +316,6 @@ The pod has been created with the filesystem of the main system in its /root dir
 
 `kubeletctl run "cat /root/root/root.txt" --pod nginxt --container nginxt --server 10.10.11.133`
 
-![SteamCloud-3](https://0xtonyr.github.io/assets/img/hackthebox/steamcloud/SteamCloud-3.png)
+![SteamCloud-3](/assets/img/hackthebox/steamcloud/SteamCloud-3.png)
 
-![SteamCloud-4](https://0xtonyr.github.io/assets/img/hackthebox/steamcloud/SteamCloud-4.png)
+![SteamCloud-4](/assets/img/hackthebox/steamcloud/SteamCloud-4.png)

@@ -4,7 +4,7 @@ title: "XSS Lab #10 - DOM XSS in document.write Sink Using source location.searc
 date: 2026-05-18 00:00 -0300
 categories: [Web Security Academy, XSS]
 tags: [xss, dom-xss, document.write, javascript, portswigger, web-security-academy, caido]
-image: https://0xtonyr.github.io/assets/img/portswigger/xss-lab-10/alert-triggered.png
+image: /assets/img/portswigger/xss-lab-10/alert-triggered.png
 excerpt: "Exploiting a DOM XSS sink by injecting into a select element built dynamically with document.write and location.search."
 ---
 
@@ -24,19 +24,19 @@ To solve this lab, perform a cross-site scripting attack that breaks out of the 
 
 The lab presents an e-commerce-style product listing. Clicking on a product takes us to its detail page, which includes a stock checker feature.
 
-![Product page overview](https://0xtonyr.github.io/assets/img/portswigger/xss-lab-10/product-page.png)
+![Product page overview](/assets/img/portswigger/xss-lab-10/product-page.png)
 
 ### Step 2: Interacting with the Stock Checker
 
 Selecting one of the items to test the stock check functionality.
 
-![Stock checker interaction](https://0xtonyr.github.io/assets/img/portswigger/xss-lab-10/stock-checker.png)
+![Stock checker interaction](/assets/img/portswigger/xss-lab-10/stock-checker.png)
 
 ### Step 3: Analyzing the Request
 
 Using the **Caido** proxy request history, we can see that the stock check is performed via POST.
 
-![Caido proxy showing POST request](https://0xtonyr.github.io/assets/img/portswigger/xss-lab-10/caido-post-request.png)
+![Caido proxy showing POST request](/assets/img/portswigger/xss-lab-10/caido-post-request.png)
 
 ### Step 4: Identifying the Vulnerable JavaScript
 
@@ -48,7 +48,7 @@ GET /product?productId=XX
 
 In the response, there is a JavaScript snippet that reveals how the site handles stock lookups:
 
-![JavaScript source showing document.write usage](https://0xtonyr.github.io/assets/img/portswigger/xss-lab-10/js-source.png)
+![JavaScript source showing document.write usage](/assets/img/portswigger/xss-lab-10/js-source.png)
 
 ```html
 <form id="stockCheckForm" action="/product/stock" method="POST">
@@ -110,9 +110,9 @@ Breaking it down:
 
 Sending the crafted URL executes the payload and pops the alert, solving the lab.
 
-![Payload in the URL bar](https://0xtonyr.github.io/assets/img/portswigger/xss-lab-10/payload-sent.png)
+![Payload in the URL bar](/assets/img/portswigger/xss-lab-10/payload-sent.png)
 
-![Alert successfully triggered](https://0xtonyr.github.io/assets/img/portswigger/xss-lab-10/alert-triggered.png)
+![Alert successfully triggered](/assets/img/portswigger/xss-lab-10/alert-triggered.png)
 
 ---
 

@@ -4,7 +4,7 @@ title: "Flag Command - HTB CTF Write-up"
 date: 2026-04-22 00:00 -0300
 categories: [CTF, Web Security]
 tags: [api-exploitation, web, ctf, htb, caido, json, recon]
-image: https://0xtonyr.github.io/assets/img/ctf/flag-command/caido-intercept.png
+image: /assets/img/ctf/flag-command/caido-intercept.png
 excerpt: "Navigating a whimsical text-based game to extract the flag by discovering a secret command hidden inside the API responses."
 ---
 
@@ -23,7 +23,7 @@ A whimsical, interactive text-based game where you wake up in a mysterious alien
 
 Using **Caido** proxy, I intercepted HTTP traffic to identify the application structure and API endpoints.
 
-![Caido intercept showing initial traffic](https://0xtonyr.github.io/assets/img/ctf/flag-command/caido-intercept.png)
+![Caido intercept showing initial traffic](/assets/img/ctf/flag-command/caido-intercept.png)
 
 **Key Finding:** Discovered an API endpoint at `/api/options` that returned all possible game commands in JSON format.
 
@@ -31,7 +31,7 @@ Using **Caido** proxy, I intercepted HTTP traffic to identify the application st
 curl http://154.57.164.76:31023/api/options
 ```
 
-![API options endpoint response](https://0xtonyr.github.io/assets/img/ctf/flag-command/api-options-response.png)
+![API options endpoint response](/assets/img/ctf/flag-command/api-options-response.png)
 
 ---
 

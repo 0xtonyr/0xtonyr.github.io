@@ -4,7 +4,7 @@ title: "XSS Lab #9 - Reflected XSS into a JavaScript String with Angle Brackets 
 date: 2026-05-18 00:00 -0300
 categories: [Web Security Academy, XSS]
 tags: [xss, reflected-xss, javascript, portswigger, web-security-academy, caido]
-image: https://0xtonyr.github.io/assets/img/portswigger/xss-lab-9/alert-triggered.png
+image: /assets/img/portswigger/xss-lab-9/alert-triggered.png
 excerpt: "Breaking out of a JavaScript string context to trigger an alert when angle brackets are HTML encoded."
 ---
 
@@ -22,19 +22,19 @@ This lab contains a reflected cross-site scripting vulnerability in the search q
 
 Upon entering the site, we are greeted with a search box.
 
-![Search box on the lab homepage](https://0xtonyr.github.io/assets/img/portswigger/xss-lab-9/search-box.png)
+![Search box on the lab homepage](/assets/img/portswigger/xss-lab-9/search-box.png)
 
 ### Step 2: Analyzing the Request
 
 When analyzing the traffic through the **Caido** proxy, we can see that searched items are sent to `/` via GET through the `search` parameter.
 
-![Caido proxy showing GET request with search parameter](https://0xtonyr.github.io/assets/img/portswigger/xss-lab-9/caido-get-request.png)
+![Caido proxy showing GET request with search parameter](/assets/img/portswigger/xss-lab-9/caido-get-request.png)
 
 ### Step 3: Testing Angle Brackets
 
 When sending a simple payload like **`<script>alert(1)</script>`**, we can see that the `<>` characters appear filtered in the output.
 
-![Response showing angle brackets are encoded](https://0xtonyr.github.io/assets/img/portswigger/xss-lab-9/angle-brackets-filtered.png)
+![Response showing angle brackets are encoded](/assets/img/portswigger/xss-lab-9/angle-brackets-filtered.png)
 
 ### Step 4: Finding the Injection Point
 
@@ -88,7 +88,7 @@ The resulting JavaScript becomes:
 
 Sending the payload triggers the `alert(1)` successfully, solving the lab.
 
-![Alert successfully triggered](https://0xtonyr.github.io/assets/img/portswigger/xss-lab-9/alert-triggered.png)
+![Alert successfully triggered](/assets/img/portswigger/xss-lab-9/alert-triggered.png)
 
 ---
 
