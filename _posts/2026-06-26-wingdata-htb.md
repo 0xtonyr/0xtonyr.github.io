@@ -453,6 +453,35 @@ The script runs as root via sudo and takes a backup file (`-b`, validated by the
 
 Since `wacky` had no write permission on `/opt/backup_clients/restored_backups/` (making it impossible to pre-stage a symlink before the script ran) and `crontab -l` revealed no scheduled jobs processing the extracted content, the two most obvious privesc hypotheses were ruled out. That left the extraction mechanism itself as the attack surface: the script uses `tar.extractall(path=staging_dir, filter="data")`, and `filter="data"` is precisely the `tarfile` module's native protection (PEP 706, introduced in Python 3.12) against classic tar slip attacks. With that in mind, it made sense to specifically look for CVEs that compromise this protection — not the tar content itself, but the security filter — which led to CVE-2025-4517, a known flaw in the `os.path.realpath()` used internally by the `data` filter.
 
+A Google search for "tarfile exploit" surfaced **CVE-2025-4517**:
+
+![WingData-6](/assets/img/hackthebox/wingdata/WingData-6.png)
+
+[https://github.com/0xDTC/CVE-2025-4517-tarfile-PATH_MAX-bypass](https://github.com/0xDTC/CVE-2025-4517-tarfile-PATH_MAX-bypass)
+
+Reviewing the repository's `README.md`, we need to confirm that the Python version on the target falls within the affected range.
+
+```bash
+wacky@wingdata:~$ /usr/local/bin/python3 --version
+Python 3.12.3
+```
+
+Python 3.12.3 confirmed: it's within the vulnerable range (3.12.0–3.12.10).
+
+Let's clone the repository locally and build on top of the exploitation chain:
+
+```bash
+┌──(antonio㉿kali)-[~/htb/labs/wingdata]
+└─$ git clone https://github.com/0xDTC/CVE-2025-4517-tarfile-PATH_MAX-bypass
+Cloning into 'CVE-2025-4517-tarfile-PATH_MAX-bypass'...
+remote: Enumerating objects: 5, done.
+remote: Counting objects: 100% (5/5), done.
+remote: Compressing objects: 100% (4/4), done.
+remote: Total 5 (delta 1), reused 5 (delta 1), pack-reused 0 (from 0)
+Receiving objects: 100% (5/5), 8.33 KiB | 4.17 MiB/s, done.
+Resolving deltas: 100% (1/1), done.
+```
+
 ```bash
 ┌──(antonio㉿kali)-[~/htb/labs/wingdata]
 └─$ ssh-keygen -t ed25519 -f root_key -N ''
