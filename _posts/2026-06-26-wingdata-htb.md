@@ -117,7 +117,7 @@ First, we compare the response size of an existing subdomain against a non-exist
 └─$ curl -k http://wingdata.htb -H "Host: ftp.wingdata.htb" -s | wc -c                                                         
 678
 # Non-existent vhost
-└─$ curl -k http://wingdata.htb -H "Host: fodasenaoexiste.wingdata.htb" -s | wc -c                                                            
+└─$ curl -k http://wingdata.htb -H "Host: naoexiste.wingdata.htb" -s | wc -c                                                            
 362
 ```
 
