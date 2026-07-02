@@ -298,7 +298,7 @@ hashcat (v7.1.2) starting
 Session..........: hashcat
 Status...........: Cracked
 Hash.Mode........: 1410 (sha256($pass.$salt))
-Hash.Target......: 32940defd3c3ef70a2dd44a5301ff984c4742f0baae76ff5b87...ingFTP
+Hash.Target......: <wacky-hash>
 Time.Started.....: Fri Jun 26 16:16:29 2026 (1 sec)
 Time.Estimated...: Fri Jun 26 16:16:30 2026 (0 secs)
 Kernel.Feature...: Pure Kernel (password length 0-256 bytes)
